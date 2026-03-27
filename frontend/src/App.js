@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ShieldAlert, RotateCcw, ShieldCheck } from 'lucide-react';
+import { ShieldAlert, ShieldCheck } from 'lucide-react';
 
-// 🚨 THE CTF HINT: Attaching to 'window' ensures Webpack doesn't delete it during build.
-// Participants will find this by inspecting the Source tab or typing 'window' in the console.
-window._DEV_NOTES = {
-  internal_query: "_internal_vault(resourceId: String!)",
-  legacy_auth: "RS256_MIGRATION_PENDING",
-  key_store: "/static/pub.pem",
-  backup_file: "system_secrets.txt" 
-};
+// 🚨 TRAP 3: Obfuscated Base64 Clue. 
+// If they decode this string, it translates to:
+// {"internal_query": "_internal_vault(resourceId: String!)", "key_store": "/static/pub.pem", "payload_req": {"kid": "v5_legacy_key"}, "target": "/proc/self/environ"}
+window.__THEME_CONFIG_B64 = "eyJpbnRlcm5hbF9xdWVyeSI6ICJfaW50ZXJuYWxfdmF1bHQocmVzb3VyY2VJZDogU3RyaW5nISkiLCAia2V5X3N0b3JlIjogIi9zdGF0aWMvcHViLnBlbSIsICJwYXlsb2FkX3JlcSI6IHsia2lkIjogInY1X2xlZ2FjeV9rZXkifSwgInRhcmdldCI6ICIvcHJvYy9zZWxmL2Vudmlyb24ifQ==";
 
 function App() {
   const [status, setStatus] = useState("Guest Access");
@@ -18,7 +14,6 @@ function App() {
     const token = localStorage.getItem("session");
     if (token) {
       try {
-        // We decode the payload to update UI state
         const payload = JSON.parse(atob(token.split('.')[1]));
         if (payload.role === 'admin') {
           setStatus("ADMINISTRATOR");
@@ -32,13 +27,10 @@ function App() {
   };
 
   useEffect(() => {
-    // Console logs are now cryptic "System Notices"
-    console.log("%c [SYS]", "color: #22d3ee; font-weight: bold;", "Gateway: /graphql | Build: 0x9928AF");
-    // console.log("TODO: Remove window._DEV_NOTES before deploying to production!");
+    console.log("%c [SYS]", "color: #22d3ee; font-weight: bold;", "Gateway: /graphql | Build: 0x9928AF | ThemeLoaded: true");
     
     if (!localStorage.getItem("session")) {
-      // Starting token (Standard RS256 Guest Token)
-      const guestToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ3Vlc3QiLCJyb2xlIjoibWVtYmVyIn0.signature";
+      const guestToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InY1X2xlZ2FjeV9rZXkifQ.eyJ1c2VyIjoiZ3Vlc3QiLCJyb2xlIjoibWVtYmVyIn0.signature";
       localStorage.setItem("session", guestToken);
     }
     
@@ -78,10 +70,6 @@ function App() {
           </div>
         </div>
       </main>
-
-      <footer style={{ marginTop: '100px', color: '#334155', fontSize: '12px' }}>
-        <p>INTERNAL_DEV_NODE | CLUSTER_01 | SECURITY_LEVEL: HIGH</p>
-      </footer>
     </div>
   );
 }
