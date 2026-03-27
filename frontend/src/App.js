@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ShieldAlert, ShieldCheck } from 'lucide-react';
-
-// 🚨 TRAP 3: Obfuscated Base64 Clue. 
-// If they decode this string, it translates to:
-// {"internal_query": "_internal_vault(resourceId: String!)", "key_store": "/static/pub.pem", "payload_req": {"kid": "v5_legacy_key"}, "target": "/proc/self/environ"}
 window.__THEME_CONFIG_B64 = "eyJpbnRlcm5hbF9xdWVyeSI6ICJfaW50ZXJuYWxfdmF1bHQocmVzb3VyY2VJZDogU3RyaW5nISkiLCAia2V5X3N0b3JlIjogIi9zdGF0aWMvcHViLnBlbSIsICJwYXlsb2FkX3JlcSI6IHsia2lkIjogInY1X2xlZ2FjeV9rZXkifSwgInRhcmdldCI6ICIvcHJvYy9zZWxmL2Vudmlyb24ifQ==";
 
 function App() {
