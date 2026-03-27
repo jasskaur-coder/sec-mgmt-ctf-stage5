@@ -86,7 +86,8 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.listen(4000, () => {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
   
     const logsDir = path.join(__dirname, 'logs');
     if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir);
