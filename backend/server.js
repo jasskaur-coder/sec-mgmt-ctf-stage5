@@ -95,7 +95,7 @@ async function startServer() {
     fs.writeFileSync(path.join(__dirname, 'system_secrets.txt'), `--- INTERNAL VAULT ---\nACCESS_LEVEL: ADMIN\nFLAG: ${FLAG}`);
   
     console.log(`\n🚀 CSC_NITJ CTF Server Running`);
-    console.log(`🔗 Backend: http://localhost:4000/graphql`);
+    console.log(`🔗 Backend: https://sec-mgmt-ctf-stage5-1.onrender.com/graphql`);
   });
 }
 
